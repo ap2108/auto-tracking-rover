@@ -2,7 +2,7 @@ from ESPSocket import ESPSocket
 from pynput.keyboard import Listener
 import time
 
-ESP_IP = "192.168.29.84"
+ESP_IP = "192.168.29.162"
 ESP_PORT = 1235
 PACKET_DELAY = 0.05 
 
@@ -11,7 +11,7 @@ curvature = 100
 manual = True
 
 pressed_keys = set()
-speeds = [0, 0, True]
+speeds = [0, 0, 0, 0, True]
 
 def on_press(key):
     try:
@@ -43,21 +43,25 @@ def main():
                 
         if manual:
             if 'w' in pressed_keys:
-                speeds = [max_speed, max_speed, True]
+                speeds = [max_speed, max_speed, max_speed, max_speed, True]
                 if 'a' in pressed_keys:
                     speeds[0] = max_speed-curvature
-                if 'd' in pressed_keys:
                     speeds[1] = max_speed-curvature
+                if 'd' in pressed_keys:
+                    speeds[2] = max_speed-curvature
+                    speeds[3] = max_speed-curvature
 
             elif 's' in pressed_keys:
-                speeds = [max_speed, max_speed, False]
+                speeds = [max_speed, max_speed, max_speed, max_speed, False]
                 if 'a' in pressed_keys:
                     speeds[0] = max_speed-curvature
-                if 'd' in pressed_keys:
                     speeds[1] = max_speed-curvature
+                if 'd' in pressed_keys:
+                    speeds[2] = max_speed-curvature
+                    speeds[3] = max_speed-curvature
 
             else:
-                speeds = [0, 0, True] 
+                speeds = [0, 0, 0, 0, True] 
 
         else:
             speeds = calculateSpeeds()
