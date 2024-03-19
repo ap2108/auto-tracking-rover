@@ -19,11 +19,10 @@ class ESPSocket(socket.socket):
 
             self.error = True
 
-    def setWheelSpeed(self, w0, w1, forward):
+    def setWheelSpeed(self, w0, w1, w2, w3, forward):
         try:
-            self.sock.sendto(struct.pack('BB?', w0, w1, forward), self.addr)
+            self.sock.sendto(struct.pack('BB?', w0, w1, w2, w3, forward), self.addr)
         except Exception as e:
             print(str(e))
             self.error = True
-
 
